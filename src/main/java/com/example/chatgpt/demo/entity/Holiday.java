@@ -1,5 +1,7 @@
 package com.example.chatgpt.demo.entity;
 
+import com.example.chatgpt.demo.utils.DateFormatUtils;
+
 import java.util.Date;
 
 public class Holiday {
@@ -98,8 +100,26 @@ public class Holiday {
         final int prime = 31;
         int result = 1;
         result = prime * result + countryCode.hashCode();
-        result = prime * result + holidayDate.hashCode();
+        result = prime * result + DateFormatUtils.formatDateToString(holidayDate).hashCode();
         return result;
+    }
+
+    // equals method
+    // @param obj
+    // @return true
+    // @return false
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Holiday))
+            return false;
+        Holiday other = (Holiday) obj;
+        if (!countryCode.equals(other.countryCode))
+            return false;
+        if (!DateFormatUtils.formatDateToString(holidayDate).equals(DateFormatUtils.formatDateToString(other.holidayDate)))
+            return false;
+        return true;
     }
 
 }

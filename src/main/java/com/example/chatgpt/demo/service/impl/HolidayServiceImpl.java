@@ -6,6 +6,7 @@ import com.example.chatgpt.demo.service.HolidayService;
 import com.example.chatgpt.demo.utils.CustomResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -18,6 +19,7 @@ public class HolidayServiceImpl implements HolidayService {
     private static final Logger logger = LoggerFactory.getLogger(HolidayServiceImpl.class);
 
     // define dao
+    @Autowired
     private HolidayDao dao;
 
     // save holidays with the given holidays set

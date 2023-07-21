@@ -131,13 +131,13 @@ public class HolidayDaoImpl implements HolidayDao {
         // transfer data from allHolidays to string
         StringBuffer sb = new StringBuffer();
         for (Holiday holiday : allHolidays) {
-            sb.append(holiday.getCountryCode() + "," + holiday.getCountryDescription() + "," + holiday.getHolidayDate() + "," + holiday.getHolidayName());
+            sb.append(holiday.getCountryCode() + "," + holiday.getCountryDescription() + "," + DateFormatUtils.formatDateToString(holiday.getHolidayDate()) + "," + holiday.getHolidayName());
             sb.append(newLine);
         }
 
         // write data to csv file
         try {
-            FileWriter fw = new FileWriter(filePath, true);
+            FileWriter fw = new FileWriter(filePath, false);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(sb.toString());
             bw.close();
@@ -150,11 +150,14 @@ public class HolidayDaoImpl implements HolidayDao {
     // batch save all holidays information to csv file
     @Override
     public CustomResponse saveHoliday(Set<Holiday> holidays) {
+        logger.info("allHolidays size: " + allHolidays.size());
         // remove duplicate holidays
         allHolidays.removeAll(holidays);
+        logger.info("allHolidays size: " + allHolidays.size());
 
         // add holidays to allHolidays
         allHolidays.addAll(holidays);
+        logger.info("allHolidays size: " + allHolidays.size());
 
         // add all holidays to csv file
         saveAllHolidayToFile();

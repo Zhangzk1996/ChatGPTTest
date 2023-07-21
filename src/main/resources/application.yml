@@ -1,2 +1,13 @@
 server:
     port: 12345
+spring:
+    application:
+        name: chatgpt-test
+    mvc:
+        pathmatch:
+            matching-strategy: ant_path_matcher
+swagger:
+    enable: true
+    application-name: ${spring.application.name}
+    application-version: 1.0
+    application-description: chatGPT demo
